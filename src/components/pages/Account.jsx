@@ -7,12 +7,6 @@ import useContextHook from "./../../hooks/ContextHook";
 import getContent from "./../../utils/getContent.js";
 import Error from "./Error";
 import EmailOrPhoneBlock from "./../EmailOrPhoneBlock";
-
-// const Error = () => {
-//   const navigate = useNavigate();
-//   useEffect(() => navigate("/error"));
-//   return null;
-// };
 const Spinner = () => {
   return (
     <div className="page-overlay loading">
@@ -28,20 +22,19 @@ const GetNewAccessToken = () => {
   );
 };
 const AccountWithData = ({ data }) => {
-
   const navigate = useNavigate();
   const formErrorValidPhoneNumberTelephoneInput = useRef();
-  const formErrorTimeoutTelephineInput = useRef()
-  const formErrorSmsCodeInput = useRef()
-  const errorFormsTelephoneInput = { formError: formErrorValidPhoneNumberTelephoneInput, formErrorTimeout: formErrorTimeoutTelephineInput }
-  const errorFormsSmsCodeInput = {formError: formErrorSmsCodeInput}
-
-
+  const formErrorTimeoutTelephineInput = useRef();
+  const formErrorSmsCodeInput = useRef();
+  const errorFormsTelephoneInput = {
+    formError: formErrorValidPhoneNumberTelephoneInput,
+    formErrorTimeout: formErrorTimeoutTelephineInput,
+  };
+  const errorFormsSmsCodeInput = { formError: formErrorSmsCodeInput };
   const [vehicleAddIsOpen, setVehicleAddIsOpen] = useState(false);
   const addVehicleButton = useRef();
   const vehiclAddPanel = useRef();
   const formError = useRef();
-  // const navigate = useNavigate();
   const accessToken = storage.localLoadData("accessToken");
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -73,14 +66,12 @@ const AccountWithData = ({ data }) => {
             {setUper(data?.accountPhoneNumber)}
           </span>
         </div>
-
         <button
           className="account-action-button add-phone-button"
           type="button"
         >
           Добавить номер телефона
         </button>
-
         <form className="account-form modal-form phone-form">
           <fieldset className="form-fieldset">
             <legend className="form-legend">Введите номер телефона</legend>
@@ -94,14 +85,12 @@ const AccountWithData = ({ data }) => {
               placeholder="+7(123)4567890"
               autoComplete="tel"
             />
-
             <div className="form-error">Введите корректный номер телефона</div>
           </fieldset>
           <button className="form-submit-button" type="submit">
             Получить код подтверждения по СМС
           </button>
         </form>
-
         <form className="account-form modal-form verification-form verification-form-sms">
           <fieldset className="form-fieldset">
             <legend className="form-legend">
@@ -116,9 +105,7 @@ const AccountWithData = ({ data }) => {
               id="ownSmsCode"
               placeholder="XXXXX"
             />
-
             <div className="form-error">Введите корректный код доступа</div>
-
             <div className="code-timer">
               100 <span className="code-timer-unit">секунд</span>
             </div>
@@ -127,19 +114,16 @@ const AccountWithData = ({ data }) => {
             Отправить код регистрации
           </button>
         </form>
-
         <div className="account-identity account-email">
           Ваш адрес электронной почты:
           <span className="account-identity-value">your@mail.com</span>
         </div>
-
         <button
           className="account-action-button add-email-button"
           type="button"
         >
           Добавить адрес электронной почты
         </button>
-
         <form className="account-form modal-form email-form">
           <fieldset className="form-fieldset">
             <legend className="form-legend">Введите Email</legend>
@@ -153,14 +137,12 @@ const AccountWithData = ({ data }) => {
               placeholder="your@email.com"
               autoComplete="email"
             />
-
             <div className="form-error">Введите корректный email</div>
           </fieldset>
           <button className="form-submit-button" type="submit">
             Получить код подтверждения на эл. почту
           </button>
         </form>
-
         <form className="account-form modal-form verification-form verification-form-email">
           <fieldset className="form-fieldset">
             <legend className="form-legend">
@@ -175,11 +157,9 @@ const AccountWithData = ({ data }) => {
               id="onwEmailCode"
               placeholder="XXXXX"
             />
-
             <div className="form-error">
               Введите корректный код подтверждения
             </div>
-
             <div className="code-timer">
               100 <span className="code-timer-unit">секунд</span>
             </div>
@@ -199,7 +179,6 @@ const AccountWithData = ({ data }) => {
           >
             Добавить транспортное средство 26 {getContent("26")}
           </button>
-
           <div
             className={`vehicle-add-panel ${vehicleAddIsOpen ? " is-open " : ""}`}
             ref={vehiclAddPanel}
@@ -212,55 +191,11 @@ const AccountWithData = ({ data }) => {
                 номеру телефона
               </span>
             </div>
-            {/* <EmailOrPhoneBlock
-              telephoneInputUrl={"/api/web/getSmsForLinkVehicle"}
-              smsCodeInputUrl={"/api/web/confirmLinkVehicleBySms"}
-              errorFormsTelephoneInput={ errorFormsTelephoneInput }
-          errorFormsSmsCodeInput={errorFormsSmsCodeInput}
-          isHome={false}
-          smaCodeInputAuth={accessToken}
-              smsCodeInputFun={(data) => {
-                try {
-              if (!data) throw new Error("Custom error! !data");
-              if (!data?.result || !data?.description || !data?.responseCode)
-                throw new Error(
-                  "Custom error! !data.result || !data.description || !data.responseCode",
-                );
-              // if (data?.responseCode == "0201000")
-              //   throw new Error(
-              //     "Custom error! data?.responseCode == '0201000'",
-              //   );
-              // if (data?.responseCode == "0201001")
-              //   throw new Error(
-              //     "Custom error! data?.responseCode == '0201001'",
-              //   );
-              // if (data?.responseCode == "0201002")
-              //   return formError.current.classList.add("is-visible");
-              // if (data.result == "ERR")
-              //   throw new Error("Custom error! data.result == 'ERR'");
-              // if (!data.accessToken || !data.refreshToken)
-              //   throw new Error(
-              //     "Custom error! !data.accessToken || !data.refreshToken",
-              //   );
-              // storage.localSaveData("accessToken", data.accessToken);
-              // storage.localSaveData("refreshToken", data.refreshToken);
-              navigate("/account");
-            } catch (e) {
-              console.error(e);
-              context.setEvantsPossible(true);
-              navigate("/error");
-            }
-              }}
-              formError={formError}
-              smaCodeInputAuth={accessToken}
-            /> */}
           </div>
         </div>
-
         <h1 className="vehicles-title">
           Список "привязанных" транспортных средств 27 {getContent("27")}
         </h1>
-
         <ul className="vehicles-list">
           {data["vehicleList"].map((elem, i) => {
             return (
@@ -320,7 +255,6 @@ const AccountWithData = ({ data }) => {
     </>
   );
 };
-
 export default function Account() {
   const context = useContextHook();
   const navigate = useNavigate();

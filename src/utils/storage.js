@@ -4,7 +4,6 @@ const sessionSaveJSON = (key, data) =>
 const sessionLoadData = (key) => key && sessionStorage.getItem(key);
 const sessionSaveData = (key, data) =>
   sessionStorage.setItem(key, String(data));
-
 const localLoadJSON = (key) => key && JSON.parse(localStorage.getItem(key));
 const localSaveJSON = (key, data) =>
   localStorage.setItem(key, JSON.stringify(data));
@@ -18,5 +17,5 @@ export default {
   localLoadJSON,
   localSaveJSON,
   localLoadData,
-  localSaveData
+  localSaveData,
 };

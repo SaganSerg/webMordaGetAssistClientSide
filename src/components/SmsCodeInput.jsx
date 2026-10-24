@@ -6,7 +6,6 @@ import getContent from "./../utils/getContent.js";
 import customFetch from "./../utils/customFetch.js";
 import { smsCodeLength } from "./../config.json";
 import storage from "./../utils/storage.js";
-
 export default function SmSCodeInput({
   componentRef,
   countdown,
@@ -17,10 +16,8 @@ export default function SmSCodeInput({
 }) {
   const context = useContextHook();
   const [smSCodeInput, setSmsCodeInput] = useState("");
-  // const notCorrectAccesseCode = useRef();
   const navigate = useNavigate();
   const sendButton = useRef();
-  // const formErrorNoTelephone = useRef();
   const telephoneNumber = storage.sessionLoadData("accountPhoneNumber");
   return (
     <form
@@ -62,8 +59,6 @@ export default function SmSCodeInput({
           type="text"
           id="smsCode"
           placeholder="XXXXX"
-          // maxLength="5"
-          // minLength="5"
           value={smSCodeInput}
           onChange={(event) => {
             const value = event.target.value;
@@ -71,12 +66,10 @@ export default function SmSCodeInput({
               setSmsCodeInput(value);
           }}
         />
-
         <div ref={errors.notCorrectAccesseCode} className="form-error">
           Вы ввели некорректный код доступа, либо срок действия кода доступа
           истек!!
         </div>
-        {/* <div ref={formErrorNoTelephone} className="form-error"></div> */}
         <div className="code-timer">
           {countdown ?? "Время истекло!!!"}{" "}
           <span className="code-timer-unit">

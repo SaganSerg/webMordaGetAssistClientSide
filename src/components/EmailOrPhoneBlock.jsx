@@ -2,61 +2,18 @@ import TelephoneInput from "./TelephoneInput";
 import SmsCodeInput from "./SmsCodeInput";
 import turnActive from "./../utils/turnActive.js";
 import { useRef, useState } from "react";
-export default function EmailOrPhoneBlock({ 
-  isHome, 
+export default function EmailOrPhoneBlock({
+  isHome,
   authTabButtonTelephone,
   authTabButtonEmail,
-  // telephoneInputUrl, 
-  // smsCodeInputUrl, 
-  // smsCodeInputFun, 
-  // errorFormsSmsCodeInput, 
-  // smsCodeInputAuth, 
-  // telephoneInputAuth,
-  // errorFormsTelephoneInput
-telephoneInputParams, // componentRef, showSmsFormFun, startCountdownFun, url, fun, errors{timeIsUp, notCorrectTelephoneNumber}, auth,
-smsCodeInputParams, // componentRef, countdown, url, errors.{notCorrectAccesseCode}, fun, auth,
-emailInputParams, // componentRef
-emailCodeInputParams, // componentRef
+  telephoneInputParams, // componentRef, showSmsFormFun, startCountdownFun, url, fun, errors{timeIsUp, notCorrectTelephoneNumber}, auth,
+  smsCodeInputParams, // componentRef, countdown, url, errors.{notCorrectAccesseCode}, fun, auth,
+  emailInputParams, // componentRef
+  emailCodeInputParams, // componentRef
 
-showSmsFormFunForms,
-showSmsFormFunButtons
-
-
+  showSmsFormFunForms,
+  showSmsFormFunButtons,
 }) {
-  // const authTabButtonTelephone = useRef();
-  // const authTabButtonEmail = useRef();
-  // const authFormEmail = useRef();
-  // const authFormPhone = useRef();
-  // const verificationFormEmail = useRef();
-  // const verificationFormSMS = useRef();
-  // const [countdown, setCountdown] = useState(null);
-  // function turnActive(activeElement, activeButton) {
-  //   const buttons = [authTabButtonTelephone, authTabButtonEmail];
-  //   buttons.forEach((e) => e.current.classList.remove("active"));
-  //   activeButton.current.classList.add("active");
-  //   const forms = [
-  //     authFormEmail,
-  //     authFormPhone,
-  //     verificationFormEmail,
-  //     verificationFormSMS,
-  //   ];
-  //   forms.forEach((e) => e.current.classList.remove("is-active"));
-  //   activeElement.current.classList.add("is-active");
-  // }
-  // function startCountdown(timestampMs, lifetimeSMS) {
-  //   const targetTime = timestampMs + lifetimeSMS;
-  //   const now = Date.now();
-  //   let remainingSeconds = Math.ceil((targetTime - now) / 1000);
-  //   setCountdown(remainingSeconds);
-  //   const timer = setInterval(() => {
-  //     if (remainingSeconds <= 0) {
-  //       setCountdown(null);
-  //       clearInterval(timer);
-  //       return;
-  //     }
-  //     setCountdown(remainingSeconds--);
-  //   }, 1000);
-  // }
   return (
     <>
       <ul className={`auth-tabs ${!isHome ? " vehicle-add-tabs " : null}`}>
@@ -65,7 +22,12 @@ showSmsFormFunButtons
             className="auth-tab-button active"
             type="button"
             onClick={() => {
-              turnActive(telephoneInputParams.componentRef, authTabButtonTelephone, showSmsFormFunButtons,  showSmsFormFunForms);
+              turnActive(
+                telephoneInputParams.componentRef,
+                authTabButtonTelephone,
+                showSmsFormFunButtons,
+                showSmsFormFunForms,
+              );
             }}
             ref={authTabButtonTelephone}
           >
@@ -77,7 +39,12 @@ showSmsFormFunButtons
             className="auth-tab-button"
             type="button"
             onClick={() => {
-              turnActive(emailInputParams.componentRef, authTabButtonEmail, showSmsFormFunButtons,  showSmsFormFunForms);
+              turnActive(
+                emailInputParams.componentRef,
+                authTabButtonEmail,
+                showSmsFormFunButtons,
+                showSmsFormFunForms,
+              );
             }}
             ref={authTabButtonEmail}
           >
@@ -85,7 +52,10 @@ showSmsFormFunButtons
           </button>
         </li>
       </ul>
-      <form className="auth-form auth-form-email" ref={emailInputParams.componentRef}>
+      <form
+        className="auth-form auth-form-email"
+        ref={emailInputParams.componentRef}
+      >
         <fieldset className="form-fieldset">
           <legend className="form-legend">Введите Email</legend>
           <label className="form-label" htmlFor="email">
@@ -131,43 +101,20 @@ showSmsFormFunButtons
         </button>
       </form>
       <TelephoneInput
-        // url={telephoneInputUrl}
-        // authFormPhoneRef={authFormPhone}
-        // showSMSform={() => {
-        //   turnActive(verificationFormSMS, authTabButtonTelephone);
-        // }}
-        // startCountdown={startCountdown}
-        //  errorForms={errorFormsTelephoneInput}
-        //  auth={telephoneInputAuth}
-
-
-         componentRef={telephoneInputParams.componentRef}
-  // showSmsFormFun={() => {
-  //         turnActive(verificationFormSMS, authTabButtonTelephone);
-  //       }}
-  // startCountdownFun={startCountdown}
-  url={telephoneInputParams.url}
-  fun={telephoneInputParams.fun}
-  errors={telephoneInputParams.errors}
-  auth={telephoneInputParams.auth}
-  showSmsFormFun={telephoneInputParams.showSmsFormFun}
+        componentRef={telephoneInputParams.componentRef}
+        url={telephoneInputParams.url}
+        fun={telephoneInputParams.fun}
+        errors={telephoneInputParams.errors}
+        auth={telephoneInputParams.auth}
+        showSmsFormFun={telephoneInputParams.showSmsFormFun}
       />
       <SmsCodeInput
-        // url={smsCodeInputUrl}
-        // verificationFormSmsRef={verificationFormSMS}
-        // countdown={countdown}
-        // fun={smsCodeInputFun}
-        // errorForms={errorFormsSmsCodeInput}
-        // auth={smsCodeInputAuth}
-
-
         componentRef={smsCodeInputParams.componentRef}
-  countdown={smsCodeInputParams.countdown}
-  url={smsCodeInputParams.url}
-  errors={smsCodeInputParams.errors}
-  fun={smsCodeInputParams.fun}
-  auth={smsCodeInputParams.auth}
-       
+        countdown={smsCodeInputParams.countdown}
+        url={smsCodeInputParams.url}
+        errors={smsCodeInputParams.errors}
+        fun={smsCodeInputParams.fun}
+        auth={smsCodeInputParams.auth}
       />
     </>
   );

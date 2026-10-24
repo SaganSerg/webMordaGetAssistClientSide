@@ -28,7 +28,7 @@ export default function TelephoneInput({
   startCountdownFun,
   url,
   fun,
-  errors, // здесь должен объект с элементами errors.timeIsUp и errors.notCorrectTelephoneNumber
+  errors, // errors.{timeIsUp, notCorrectTelephoneNumber}
   auth,
 }) {
   const context = useContextHook();
@@ -39,7 +39,6 @@ export default function TelephoneInput({
   const [countryListVisible, setCountryVisible] = useState(false);
   const [phoneIndex, setPhoneIndex] = useState(null);
   const navigate = useNavigate();
-  // const placeholder = contents[lang]["10"].value
   const placeholder = getContent("10") + " Но сначала, выберите код страны";
   const sendButton = useRef();
   function placehoderModification(stringPlaceholder, unvisibleNumber) {
@@ -75,37 +74,6 @@ export default function TelephoneInput({
     storage.sessionSaveData("accountPhoneNumber", phoneInputValue);
     customFetch({
       url: `${webProtocol}://${domen}:${port}${url}`,
-      //   fun: (data) => {
-      //     try {
-      //       if (!data) throw new Error("Custom error! !data");
-      //       if (!data?.result || !data?.description || !data?.responseCode ) throw Error("Custom error! !data.result || !data.description || !data.responseCode");
-      //       // data { result: "ERR", description: "The waiting period for requesting a new SMS has not yet expired.", responseCode: "0191002", howMuchTimeLeft: 1791465741487 }
-      //       if (data?.responseCode == "0191000") {
-      //         errors.notCorrectTelephoneNumber.current.classList.add("is-visible");
-      //         return
-      //       }
-      //       if (data?.responseCode == "0191001") throw Error("Custom error! data?.responseCode == '0191001'");
-      //       if (data?.responseCode == "0191002") {
-      //         const { howMuchTimeLeft } = data
-      //         if (!howMuchTimeLeft ) throw Error("Custom error! !data?.howMuchTimeLeft");
-      //         errors.timeIsUp.current.classList.add('is-visible')
-      //         return errors.timeIsUp.current.innerHTML = `Вы можете запросить СМС не ранее чем через ${Math.ceil(howMuchTimeLeft / 1000)} секунд`
-      //       }
-      //       if (data.result == 'ERR') throw new Error("Custom error! data.result == 'ERR'");
-      //       if (
-      //         !data.timestamp ||
-      //         !data.lifetimeSms
-      //       )
-      //         throw new Error("Custom error! JSON-parameters are lost!");
-      //       startCountdownFun(data.timestamp, data.lifetimeSms);
-      //       showSmsFormFun();
-      //       // setResendSmsRequestPeriod(data.resendSmsRequestPeriod / (1000 * 60));
-      //     } catch (e) {
-      //       console.error(e);
-      //       context.setEvantsPossible(true);
-      //       navigate("/error");
-      //     }
-      //   },
       fun,
       method: "POST",
       body: JSON.stringify({
@@ -169,14 +137,14 @@ export default function TelephoneInput({
           <label className="form-label" htmlFor="phone">
             {templateTel}
           </label>
-
           <input
             className="form-input"
             type="tel"
             onChange={(e) => {
               let value = e.target.value;
-              // setCountryVisible(false)
-              errors.notCorrectTelephoneNumber.current.classList.remove("is-visible");
+              errors.notCorrectTelephoneNumber.current.classList.remove(
+                "is-visible",
+              );
               if (/^[0-9()\-+.]+$/.test(value)) {
                 if (value.length > phoneInputValue.length) {
                   if (value.length > templateTel.length) {
@@ -205,15 +173,12 @@ export default function TelephoneInput({
               return;
             }}
             value={phoneInputValue}
-            // onFocus={() => {setCountryVisible(false)}}
-            // placeholder={contents[lang]["10"].value}
             placeholder={placeholder}
             style={{
               pointerEvents: inputAble ? "auto" : "none",
             }}
             id="phone"
           />
-
           <div className="form-error" ref={errors.notCorrectTelephoneNumber}>
             Введите корректный номер телефона
           </div>

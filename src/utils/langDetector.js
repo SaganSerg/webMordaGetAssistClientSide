@@ -1,5 +1,5 @@
 import { defaultLang } from "./../config.json";
-import contents from './../data/contents.json'
+import contents from "./../data/contents.json";
 export const detectLanguageFromBrowser = () => {
   try {
     // Получаем язык браузера
@@ -7,9 +7,8 @@ export const detectLanguageFromBrowser = () => {
     const lang = browserLang.split("-")[0].toLowerCase();
 
     // Проверяем, поддерживается ли язык
-    // const supportedLanguages = ["ru", "tr", "en"];
     // получили список поддежриваемых языков
-    const supportedLanguages = Object.keys(contents)
+    const supportedLanguages = Object.keys(contents);
 
     if (supportedLanguages.includes(lang)) {
       return lang;

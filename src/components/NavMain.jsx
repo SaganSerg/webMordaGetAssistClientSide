@@ -7,7 +7,7 @@ function NavMain() {
     <nav className={"site-navigation"}>
       <ul className={"main-menu"}>
         {pagesProps.map((pageProps, i) => {
-          if (pageProps.path != "*" && pageProps.path != '/error') {
+          if (pageProps.path != "*" && pageProps.path != "/error") {
             const { linkContenIndex } = pageProps;
             return (
               <li className={"main-menu-item"} key={i}>
@@ -27,5 +27,4 @@ function NavMain() {
     </nav>
   );
 }
-
 export default NavMain;

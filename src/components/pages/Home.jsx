@@ -12,10 +12,8 @@ export default function Home() {
   const formErrorValidPhoneNumberTelephoneInput = useRef();
   const formErrorTimeoutTelephineInput = useRef();
   const formErrorSmsCodeInput = useRef();
-
   const authTabButtonTelephone = useRef();
   const authTabButtonEmail = useRef();
-
   const authFormEmail = useRef();
   const authFormPhone = useRef();
   const verificationFormEmail = useRef();
@@ -97,7 +95,6 @@ export default function Home() {
           throw Error(
             "Custom error! !data.result || !data.description || !data.responseCode",
           );
-        // data { result: "ERR", description: "The waiting period for requesting a new SMS has not yet expired.", responseCode: "0191002", howMuchTimeLeft: 1791465741487 }
         if (data?.responseCode == "0191000") {
           errors.notCorrectTelephoneNumber.current.classList.add("is-visible");
           return;
@@ -117,7 +114,6 @@ export default function Home() {
           throw new Error("Custom error! JSON-parameters are lost!");
         startCountdownFun(data.timestamp, data.lifetimeSms, setCountdown);
         showSmsFormFun();
-        // setResendSmsRequestPeriod(data.resendSmsRequestPeriod / (1000 * 60));
       } catch (e) {
         console.error(e);
         context.setEvantsPossible(true);
@@ -138,46 +134,6 @@ export default function Home() {
             уже только в личном кабинете
           </span>
         </div>
-        {/* <EmailOrPhoneBlock
-          errorFormsTelephoneInput={ errorFormsTelephoneInput }
-          errorFormsSmsCodeInput={errorFormsSmsCodeInput}
-          isHome={true}
-          telephoneInputUrl={"/api/web/getSMS"}
-          smsCodeInputUrl={"/api/web/getTokensBySms"}
-          smaCodeInputAuth={null}
-          smsCodeInputFun={(data) => {
-            try {
-              if (!data) throw new Error("Custom error! !data");
-              if (!data?.result || !data?.description || !data?.responseCode)
-                throw new Error(
-                  "Custom error! !data.result || !data.description || !data.responseCode",
-                );
-              if (data?.responseCode == "0201000")
-                throw new Error(
-                  "Custom error! data?.responseCode == '0201000'",
-                );
-              if (data?.responseCode == "0201001")
-                throw new Error(
-                  "Custom error! data?.responseCode == '0201001'",
-                );
-              if (data?.responseCode == "0201002")
-                return formError.current.classList.add("is-visible");
-              if (data.result == "ERR")
-                throw new Error("Custom error! data.result == 'ERR'");
-              if (!data.accessToken || !data.refreshToken)
-                throw new Error(
-                  "Custom error! !data.accessToken || !data.refreshToken",
-                );
-              storage.localSaveData("accessToken", data.accessToken);
-              storage.localSaveData("refreshToken", data.refreshToken);
-              navigate("/account");
-            } catch (e) {
-              console.error(e);
-              context.setEvantsPossible(true);
-              navigate("/error");
-            }
-          }}
-        /> */}
         <EmailOrPhoneBlock
           isHome={true}
           showSmsFormFunForms={showSmsFormFunForms}

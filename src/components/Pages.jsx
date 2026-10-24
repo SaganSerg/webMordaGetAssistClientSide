@@ -1,9 +1,7 @@
 import { createElement } from "react";
-
 import Home from "./pages/Home";
-import Account from './pages/Account'
+import Account from "./pages/Account";
 import Error from "./pages/Error";
-
 const PageComponentList = {
   Home: function ({}) {
     return <Home />;
@@ -30,7 +28,6 @@ const PageComponentList = {
     );
   },
   Account: function ({}) {
-   
     return <Account />;
   },
   Page404: function ({}) {
@@ -41,7 +38,7 @@ const PageComponentList = {
     );
   },
   Error: function ({}) {
-    return <Error />
+    return <Error />;
   },
 };
 class Page {
@@ -53,7 +50,6 @@ class Page {
     this.place = place;
     this.titleContentIndex = titleContentIndex;
     this.element = createElement(PageComponentList[this.name]);
-
   }
 }
 const pagesParamList = [
