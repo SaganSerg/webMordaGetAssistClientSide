@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <style>
+    .waitingForDownload {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .waitingForDownload svg {
+      width: 200px;
+      height: auto;
+      display: block;
+      transform-origin: center;
+      animation: pulseScale 1s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulseScale {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    .waitingForDownload svg path {
+      animation: pulseColor 1s infinite alternate ease-in-out;
+    }
+
+    @keyframes pulseColor {
+      from {
+        fill: black;
+      }
+
+      to {
+        fill: #fff;
+      }
+    }
+  </style>
+</head>
+
+<body id="root">
+  <div class="waitingForDownload">
+    <svg width="729" height="384" viewBox="0 0 729 384" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M298.558 202.986C248.8 202.986 208.411 243.47 208.411 293.345C208.411 343.214 248.8 383.704 298.558 383.704C348.309 383.704 388.705 343.214 388.705 293.345C388.705 243.47 348.309 202.986 298.558 202.986ZM422.299 208.5L422.534 378.184H457.243L457.199 310.737H529.184L543.429 275.947L457.125 275.91V243.29H714.118L728.388 208.5H422.299ZM699.447 275.947L578.41 275.891L578.552 378.184H613.254L613.211 310.737H685.202L699.447 275.947ZM298.558 236.976C329.597 236.976 354.794 262.233 354.794 293.345C354.794 324.457 329.597 349.714 298.558 349.714C267.519 349.714 242.322 324.457 242.322 293.345C242.322 262.233 267.519 236.976 298.558 236.976ZM87.3991 73.0603L178.622 72.961C179.718 78.593 180.293 84.4048 180.293 90.3469C180.293 140.216 139.898 180.706 90.1466 180.706C40.389 180.706 0 140.216 0 90.3469C0 41.3154 39.04 1.35837 87.6343 0.0248103C88.0241 0.0124052 88.4078 0.00620259 88.7976 0V33.9964C58.3837 34.7097 33.9102 59.6875 33.9102 90.3469C33.9102 121.459 59.1077 146.716 90.1466 146.716C115.134 146.716 136.34 130.341 143.654 107.72H73.1296L87.3991 73.0603ZM214.438 72.9362L214.581 175.235L389.033 175.049L389.354 140.706L249.264 140.625L249.246 107.745H329.028L343.272 72.9548L214.438 72.9362ZM214.395 40.3292L422.113 40.0439L422.299 175.192H457.008L456.921 40.292H537.866L552.135 5.50169H214.346L214.395 40.3292Z"
+        fill="black" />
+    </svg>
+  </div>
+</body>
+<script type="module" src="/src/main.jsx" defer></script>
+
+</html>

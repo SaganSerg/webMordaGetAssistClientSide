@@ -1,0 +1,20 @@
+{
+  "defaultLang": "en",
+  "webProtocol": "http",
+  "domen": "localhost",
+  "port": "3000",
+  "defaultCounty": "RU",
+  "countryList": {
+    "RU": {
+      "phonePlaceholder": "+7(XXX)XXX-XX-XX"
+    },
+    "CN": {
+      "phonePlaceholder": "+88(XXX)XXX-XX-XX-X"
+    },
+    "TR": {
+      "phonePlaceholder": "+999(XXX)XXX-XX-XX-XX"
+    }
+  },
+  "fetchTimeout": 60000,
+  "smsCodeLength": 5
+}
