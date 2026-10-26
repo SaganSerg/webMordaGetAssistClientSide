@@ -28,8 +28,9 @@ export default function TelephoneInput({
   startCountdownFun,
   url,
   fun,
-  errors, // errors.{timeIsUp, notCorrectTelephoneNumber}
+  errors, // errors.{timeIsUp, notCorrectTelephoneNumber, noSuchPhone}
   auth,
+  forRegistrationAccount
 }) {
   const context = useContextHook();
   const { lang, eventsPossible } = context;
@@ -70,8 +71,9 @@ export default function TelephoneInput({
       return errors.notCorrectTelephoneNumber.current.classList.add(
         "is-visible",
       );
-    }
-    storage.sessionSaveData("accountPhoneNumber", phoneInputValue);
+    };
+    const sessionDataName = forRegistrationAccount ?  "accountPhoneNumber" : 'vehiclePhoneNumber'
+    storage.sessionSaveData(sessionDataName, phoneInputValue);
     customFetch({
       url: `${webProtocol}://${domen}:${port}${url}`,
       fun,
@@ -181,6 +183,9 @@ export default function TelephoneInput({
           />
           <div className="form-error" ref={errors.notCorrectTelephoneNumber}>
             Введите корректный номер телефона
+          </div>
+          <div className="form-error" ref={errors.noSuchPhone}>
+            Нет такого номера телефона в базе
           </div>
           <div className="form-error" ref={errors.timeIsUp}></div>
         </fieldset>

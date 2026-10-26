@@ -6,8 +6,8 @@ export default function EmailOrPhoneBlock({
   isHome,
   authTabButtonTelephone,
   authTabButtonEmail,
-  telephoneInputParams, // componentRef, showSmsFormFun, startCountdownFun, url, fun, errors{timeIsUp, notCorrectTelephoneNumber}, auth,
-  smsCodeInputParams, // componentRef, countdown, url, errors.{notCorrectAccesseCode}, fun, auth,
+  telephoneInputParams, // componentRef, showSmsFormFun, startCountdownFun, url, fun, errors{timeIsUp, notCorrectTelephoneNumber}, auth, forRegistrationAccount
+  smsCodeInputParams, // componentRef, countdown, url, errors.{notCorrectAccesseCode}, fun, auth, forRegistrationAccount
   emailInputParams, // componentRef
   emailCodeInputParams, // componentRef
 
@@ -107,6 +107,7 @@ export default function EmailOrPhoneBlock({
         errors={telephoneInputParams.errors}
         auth={telephoneInputParams.auth}
         showSmsFormFun={telephoneInputParams.showSmsFormFun}
+        forRegistrationAccount={telephoneInputParams.forRegistrationAccount}
       />
       <SmsCodeInput
         componentRef={smsCodeInputParams.componentRef}

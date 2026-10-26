@@ -122,6 +122,7 @@ export default function Home() {
     },
     showSmsFormFun: showSmsFormFun,
     componentRef: authFormPhone,
+    forRegistrationAccount: true
   };
   return (
     <>

@@ -13,12 +13,14 @@ export default function SmSCodeInput({
   errors, // errors.notCorrectAccesseCode
   fun,
   auth,
+  forRegistrationAccount
 }) {
   const context = useContextHook();
   const [smSCodeInput, setSmsCodeInput] = useState("");
   const navigate = useNavigate();
   const sendButton = useRef();
-  const telephoneNumber = storage.sessionLoadData("accountPhoneNumber");
+  const sessionDataName = forRegistrationAccount ?  "accountPhoneNumber" : 'vehiclePhoneNumber'
+  const telephoneNumber = storage.sessionLoadData(sessionDataName);
   return (
     <form
       className="auth-form verification-form verification-form-sms"
@@ -30,8 +32,8 @@ export default function SmSCodeInput({
             "is-visible",
           );
         }
-        const accountPhoneNumber =
-          storage.sessionLoadData("accountPhoneNumber");
+        // const accountPhoneNumber =
+        //   storage.sessionLoadData("accountPhoneNumber");
         return customFetch({
           url: `${webProtocol}://${domen}:${port}${url}`,
           fun,
