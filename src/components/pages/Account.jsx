@@ -97,7 +97,7 @@ const AccountWithData = ({ data }) => {
             "is-visible",
           );
         }
-        return navigate('/account')
+        return window.location.reload();
       } catch (e) {
         console.error(e);
         context.setEvantsPossible(true);
