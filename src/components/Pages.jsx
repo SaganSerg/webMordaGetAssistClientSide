@@ -2,6 +2,7 @@ import { createElement } from "react";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Error from "./pages/Error";
+import Logs from "./pages/Logs";
 const PageComponentList = {
   Home: function ({}) {
     return <Home />;
@@ -29,6 +30,9 @@ const PageComponentList = {
   },
   Account: function ({}) {
     return <Account />;
+  },
+  Logs: function ({}) {
+    return <Logs />
   },
   Page404: function ({}) {
     return (
@@ -107,6 +111,13 @@ const pagesParamList = [
     place: "public",
     titleContentIndex: "24",
   },
+  {
+    path: "/logs/:id",
+    end: false,
+    name: 'Logs',
+    place: 'account',
+    titleContentIndex: "36"
+  }
 ];
 const pages = [];
 pagesParamList.forEach((element) => {

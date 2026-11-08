@@ -12,23 +12,24 @@ import { webProtocol, domen, port } from "./../../config.json";
 import customFetch from "./../../utils/customFetch.js";
 import getContent from "./../../utils/getContent.js";
 import Error from "./Error";
-
-const Spinner = () => {
-  return (
-    <div className="page-overlay loading">
-      <div className="spinner"></div>
-    </div>
-  );
-};
-const GetNewAccessToken = () => {
-  return (
-    <div>
-      <button>Восстановить доступ к аккаунту 35</button>
-    </div>
-  );
-};
+import Spinner from "./Spinner";
+import GetNewAccessToken from "./GetNewAccessToken";
+// const Spinner = () => {
+//   return (
+//     <div className="page-overlay loading">
+//       <div className="spinner"></div>
+//     </div>
+//   );
+// };
+// const GetNewAccessToken = () => {
+//   return (
+//     <div>
+//       <button>Восстановить доступ к аккаунту 35</button>
+//     </div>
+//   );
+// };
 const AccountWithData = ({ data }) => {
-  // значение page может быть 'accountWithData' или getNewAccessToken
+  // значение page может быть 'accountWithData' или 'getNewAccessToken'
   const [page, setPage] = useState("accountWithData");
   const accessToken = storage.localLoadData("accessToken");
   // это блок данных для работы поле регистрации
@@ -210,6 +211,9 @@ const AccountWithData = ({ data }) => {
   }, []);
 
   const setUper = (value) => (value ? value : "Отсутсвует");
+  const getLog = id => {
+    navigate(`/logs/${id}`);
+  }
   if (page == "accountWithData")
     return (
       <>
@@ -411,7 +415,8 @@ const AccountWithData = ({ data }) => {
                       })}
                     </ul>
                   </div>
-                  <button className="vehicle-logs-button" type="button">
+                  <div>{elem.accountId}</div>
+                  <button className="vehicle-logs-button" type="button" onClick={() => getLog(elem.accountId)}>
                     Посмотреть логи 34 {getContent("34")}
                   </button>
                 </li>
@@ -422,6 +427,7 @@ const AccountWithData = ({ data }) => {
       </>
     );
   if (page == "getNewAccessToken") return <GetNewAccessToken />;
+  return <Error />
 };
 export default function Account() {
   const context = useContextHook();
